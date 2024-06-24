@@ -9,6 +9,8 @@ function form(){
     document.getElementById('haut_tronc').value = "";
     tronc_diam = document.getElementById("tronc_diam").value;
     document.getElementById('tronc_diam').value = "";
+    fk_situation = document.getElementById("fk_arb_etat").value;
+    document.getElementById('fk_arb_etat').value = "EN PLACE";
     fk_stadedev = document.getElementById("fk_stadedev").value;
     document.getElementById('fk_stadedev').value = "Jeune";
     fk_situation = document.getElementById("fk_situation").value;
@@ -19,6 +21,8 @@ function form(){
     document.getElementById('fk_pied').value = "Bac de plantation";
     fk_revetement = document.getElementById("fk_revetement").value;
     document.getElementById('fk_revetement').value = "Oui";
+    fk_revetement = document.getElementById("remarquable").value;
+    document.getElementById('remarquable').value = "Oui";
     age_estim = document.getElementById("age_estim").value;
     document.getElementById('age_estim').value = "";
     fk_prec_estim = document.getElementById("fk_prec_estim").value;
@@ -30,7 +34,7 @@ function form(){
     request += '&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied;
     request += '&fk_revetement='+fk_revetement+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech;
 
-    //ajaxRequest('POST','../php/request.php/inscription/',confirmation,request);
+    //ajaxRequest('POST','../php/request.php/form/',confirmation,request);
 }
 
 
