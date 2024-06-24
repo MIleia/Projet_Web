@@ -1,0 +1,44 @@
+function form(){
+    longitude = document.getElementById("longitude").value;
+    document.getElementById('longitude').value = "";
+    latitude = document.getElementById("latitude").value;
+    document.getElementById('latitude').value = "";
+    haut_tot = document.getElementById("haut_tot").value;
+    document.getElementById('haut_tot').value = "";
+    haut_tronc = document.getElementById("haut_tronc").value;
+    document.getElementById('haut_tronc').value = "";
+    tronc_diam = document.getElementById("tronc_diam").value;
+    document.getElementById('tronc_diam').value = "";
+    fk_stadedev = document.getElementById("fk_stadedev").value;
+    document.getElementById('fk_stadedev').value = "Jeune";
+    fk_situation = document.getElementById("fk_situation").value;
+    document.getElementById('fk_situation').value = "Alignement";
+    fk_port = document.getElementById("fk_port").value;
+    document.getElementById('fk_port').value = "architecturé";
+    fk_pied = document.getElementById("fk_pied").value;
+    document.getElementById('fk_pied').value = "Bac de plantation";
+    fk_revetement = document.getElementById("fk_revetement").value;
+    document.getElementById('fk_revetement').value = "Oui";
+    age_estim = document.getElementById("age_estim").value;
+    document.getElementById('age_estim').value = "";
+    fk_prec_estim = document.getElementById("fk_prec_estim").value;
+    document.getElementById('fk_prec_estim').value = "";
+    fk_nomtech = document.getElementById("fk_nomtech").value;
+    document.getElementById('fk_nomtech').value = "";
+
+    request = 'longitude='+longitude+'&latitude='+latitude+'&haut_tot='+haut_tot+'&haut_tronc='+haut_tronc+'&tronc_diam='+tronc_diam;
+    request += '&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied;
+    request += '&fk_revetement='+fk_revetement+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech;
+
+    //ajaxRequest('POST','../php/request.php/inscription/',confirmation,request);
+}
+
+
+function listener(){
+    document.getElementById("ajout").addEventListener("click", function(event){
+        event.preventDefault();
+        form();
+    });
+}
+
+listener();
