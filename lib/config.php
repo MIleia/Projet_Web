@@ -1,6 +1,6 @@
 <?php
     const DB_USER = 'postgres';
-    const DB_PWD = 'test';    # Change pswd
+    const DB_PWD = 'Groupe16';    # Change pswd
     const DB_NAME = 'projetinfo';
     const DB_SERVER = '127.0.0.1';
     const DB_PORT = '5432';

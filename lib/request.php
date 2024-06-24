@@ -1,23 +1,17 @@
 <?php
-    include("config.php");
-
-    //Connection database
-    class database {
-        static $db = null;
-        static function connexionBD() {
-            if (self::$db != null) {
-                return self::$db;
-            }
-            require_once ("config.php");
-            try {
-                self::$db = new PDO('pgsql:host='.DB_SERVER.';port='.DB_PORT.';dbname='.DB_NAME, DB_USER, DB_PWD);
-            }
-            catch (PDOException $exception) {
-                error_log('Connection error: '.$exception->getMessage());
-                return false;
-            }
-            return self::$db;
+    require_once('database.php');    
+    
+    $db = database::connexionBD();
+    $requestid = substr($_SERVER['PATH_INFO'], 1);
+    $requestid = explode('/', $requestid);
+    $requesttype = array_shift($requestid);
+    
+    if($requesttype=="form"){
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            $request = dbInsertNewArb($db,$_POST['longitude'],$_POST['latitude'],$_POST['haut_tot'],$_POST['haut_tronc'],$_POST['tronc_diam'],$_POST['fk_stadedev'],$_POST['fk_situation'],$_POST['fk_port'],$_POST['fk_pied'],$_POST['fk_revetement'],$_POST['age_estim'],$_POST['fk_prec_estim'],$_POST['fk_nomtech']);
         }
     }
+
+
 
 ?>
