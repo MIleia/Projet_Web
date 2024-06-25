@@ -46,7 +46,7 @@ function listener(){
 
 }
 
-if(localStorage.getItem('connecté')!='True'){
+if(sessionStorage.getItem('connecté')!='True'){
     inner =`<div class="col">
                 <button type="submit" class="btn btn-success btn-block mb-4" id="ajout" disabled>Ajouter</button>
                 <span class="text-black-50"> &ensp; Veuillez vous connecter pour ajouter un arbre </span>
