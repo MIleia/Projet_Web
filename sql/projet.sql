@@ -8,7 +8,7 @@ CREATE TABLE Users(
         mail   Varchar (50) NOT NULL,
         nom    Varchar (50) NOT NULL,
         prenom Varchar (50) NOT NULL,
-        mdp    Varchar (50) NOT NULL
+        mdp    Varchar (150) NOT NULL
 	,CONSTRAINT User_PK PRIMARY KEY (mail)
 );
 

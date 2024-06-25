@@ -46,4 +46,64 @@
             return false;
         }
     }
+
+
+    function dbGetUser($db,$mail,$mdp){
+        try{
+            $request = 'SELECT * FROM users where mail=:mail';
+            $statement = $db->prepare($request);
+            $statement->bindParam(':mail', $mail);   
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            if(!empty($result) && password_verify($mdp,$result['mdp'])){
+                return array($result['nom'],$result['prenom']);
+            }else{
+                return "error";
+            }
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    } 
+
+
+    function AlreadyUser($db,$mail){
+        try{
+            $request = 'SELECT * FROM users where mail=:mail';
+            $statement = $db->prepare($request);
+            $statement->bindParam(':mail', $mail);    
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            if(empty($user)){
+                return false;
+            }else{
+                return true;
+            }
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    }
+    function dbInsertNewUser($db,$mail,$nom,$prenom,$mdp){
+        try{
+            if(!AlreadyUser($db,$mail)){
+                $hash=password_hash($mdp, PASSWORD_DEFAULT);
+                $stmt = $db->prepare("INSERT INTO users (mail, nom, prenom, mdp) VALUES (:mail, :nom, :prenom, :mdp)");
+                $stmt->bindParam(':mail', $mail);
+                $stmt->bindParam(':nom', $nom);
+                $stmt->bindParam(':prenom', $prenom);
+                $stmt->bindParam(':mdp', $hash);
+                $stmt->execute();
+                return true;
+            }else{
+                return "Already";
+            }
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    } 
+
+
+
 ?>

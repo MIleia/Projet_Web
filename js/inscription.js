@@ -2,7 +2,20 @@ if(sessionStorage.getItem('connecté')=='True'){
     window.location.href = "/pages/accueil.html";
 }
 
+var nom = "";
+var prenom = "";
 
+function confirm(data){
+    if(data=="Already"){
+        inner = `<span style="color:red">Adresse mail déjà utilisée</span>`;
+        document.getElementById("inscrire_error").innerHTML = inner;
+    }else{
+        sessionStorage.setItem('nom', nom);
+        sessionStorage.setItem('prenom', prenom);
+        sessionStorage.setItem('connecté', 'True');
+        window.location.href = "pages/accueil.html";
+    }
+}
 
 function inscription(){
     mail = document.getElementById("mail").value;
@@ -17,15 +30,20 @@ function inscription(){
     document.getElementById('cmdp').value = "";
 
     if(mail!="" && nom!="" && prenom!="" && mdp!="" && cmdp!=""){
-        if(mdp==cmdp){
-            //sessionStorage.setItem('connecté', 'True');
-            //window.location.href = "pages/accueil.html";
+        if(mail.includes('@') && mail[mail.length-1]!='@'){
+            if(mdp==cmdp){
+                request = 'mail='+mail+'&nom='+nom+'&prenom='+prenom+'&mdp='+mdp;
+                ajaxRequest('POST','../lib/request.php/inscription/',confirm,request);
+            }else{
+                inner = `<span style="color:red;">Veuillez renseigner le même mot de passe</span>`;
+                document.getElementById("inscrire_error").innerHTML = inner;
+            }
         }else{
-            inner = `<span color="red">Veuillez renseigner le même mot de passe</span>`;
+            inner = `<span style="color:red;">Adresse mail incorrect</span>`;
             document.getElementById("inscrire_error").innerHTML = inner;
         }
     }else{
-        inner = `<span color="red">Veuillez renseigner tous les champs de textes</span>`;
+        inner = `<span style="color:red;">Veuillez renseigner tous les champs de textes</span>`;
         document.getElementById("inscrire_error").innerHTML = inner;
     }
 }   

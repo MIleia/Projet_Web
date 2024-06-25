@@ -33,7 +33,10 @@
                 <a class="nav-link" href="visualisation.html">Visualisation des arbres</a>
               </li>
             </ul>
-          </div>
+            <div id="profil" style="color:white;">
+
+            </div>
+        </div>
         </div>
     </nav>
 
@@ -53,6 +56,12 @@
     <script>
         if(sessionStorage.getItem('connecté')!='True'){
             window.location.href = "../connection.html";
+        }else{
+            prenom = sessionStorage.getItem('prenom');
+            console.log(sessionStorage.getItem('connecté'))
+            nom = sessionStorage.getItem('nom');
+            inner = prenom+' '+nom;
+            document.getElementById("profil").innerHTML = inner;
         }
     </script>
 
