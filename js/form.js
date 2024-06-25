@@ -1,3 +1,4 @@
+
 function form(){
     longitude = document.getElementById("longitude").value;
     document.getElementById('longitude').value = "";
@@ -42,6 +43,25 @@ function listener(){
         event.preventDefault();
         form();
     });
+
 }
+
+if(localStorage.getItem('connecté')!='True'){
+    inner =`<div class="col">
+                <button type="submit" class="btn btn-success btn-block mb-4" id="ajout" disabled>Ajouter</button>
+                <span class="text-black-50"> &ensp; Veuillez vous connecter pour ajouter un arbre </span>
+            </div>
+            <div class="col-3 text-end">
+                <div style="height:40px;"><a role="button"class="btn btn-primary btn-block mb-4" href="connection.html">Se connecter</a></div>
+                <div class="row"><a href="inscription.html">S'inscrire</a> &ensp;</div>
+            </div>`
+    document.getElementById("boutons_form").innerHTML = inner;
+}else{
+    inner =`<div class="col">
+                <button type="submit" class="btn btn-success btn-block mb-4" id="ajout">Ajouter</button>
+            </div>`
+    document.getElementById("boutons_form").innerHTML = inner;
+}
+
 
 listener();
