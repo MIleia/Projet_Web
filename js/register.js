@@ -1,9 +1,18 @@
+if(sessionStorage.getItem('connecté')=='True'){
+    window.location.href = "/pages/accueil.html";
+}
+
 function connection(){
     sessionStorage.setItem('connecté', 'True');
-    window.location.href = "../pages/formulaire.html";
+    window.location.href = "/pages/accueil.html";
 }   
 
+function inscription(){
 
+
+    sessionStorage.setItem('connecté', 'True');
+    window.location.href = "pages/accueil.html";
+}   
 
 
 function listener(){
@@ -11,7 +20,10 @@ function listener(){
         event.preventDefault();
         connection();
     });
-
+    document.getElementById("inscrire").addEventListener("click", function(event){
+        event.preventDefault();
+        inscription();
+    });
 }
 
 listener();
