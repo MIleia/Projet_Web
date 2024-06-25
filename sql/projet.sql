@@ -1,5 +1,5 @@
-Drop TABLE IF EXISTS Users;
 Drop TABLE IF EXISTS Arbre;
+Drop TABLE IF EXISTS Users;
 
 
 -- Création Table User
@@ -21,6 +21,7 @@ CREATE TABLE Arbre(
         latitude      Float NOT NULL,
         haut_tot      Int NOT NULL,
         haut_tronc    Int NOT NULL,
+        tronc_diam    Int NOT NULL,
         fk_prec_estim Int NOT NULL,
         fk_port       Varchar (50) NOT NULL,
         fk_pied       Varchar (50) NOT NULL,
