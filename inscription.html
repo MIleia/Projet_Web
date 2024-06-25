@@ -9,8 +9,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
-    <script src="../js/ajax.js" defer></script>
-    <script src="../js/register.js" defer></script>
+    <script src="js/ajax.js" defer></script>
+    <script src="js/inscription.js" defer></script>
 
     <style>
         body {
@@ -48,6 +48,9 @@
         </div>
     </nav>
 
+    <div class="mb-3 d-flex justify-content-center">
+        <img src="ressources/logo.png" class="" style="height:150px; width:150px;">
+    </div>
     <div class="container">
         <h2 class="text-center">Inscription</h2>
         <form id="loginForm">
@@ -73,6 +76,8 @@
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-success" id="inscrire">S'inscrire</button>
+            </div>
+            <div class="mb-3" id="inscrire_error">
             </div>
             <div class="text-center"><a href="connection.html">Se connecter</a></div>
         </form>
