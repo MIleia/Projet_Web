@@ -2,7 +2,7 @@
 function ajaxRequest(type, url, callback, data = null)
 {
     let xhr;
-    //console.log(data);
+    console.log(data);
 
     xhr = new XMLHttpRequest();
     xhr.open(type, url);
@@ -13,7 +13,7 @@ function ajaxRequest(type, url, callback, data = null)
         switch (xhr.status)
         {
         case 200:
-            //console.log(xhr.responseText);
+            console.log(xhr.responseText);
             let resp = JSON.parse(xhr.responseText);
             callback(resp);
             break;

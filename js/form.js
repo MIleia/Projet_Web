@@ -1,3 +1,7 @@
+function confirm(){
+    console.log("c bon")
+}
+
 
 function form(){
     longitude = document.getElementById("longitude").value;
@@ -30,11 +34,13 @@ function form(){
     document.getElementById('fk_prec_estim').value = "";
     fk_nomtech = document.getElementById("fk_nomtech").value;
     document.getElementById('fk_nomtech').value = "";
+    if(longitude!="" && latitude!="" && haut_tot!="" && haut_tronc!="" && tronc_diam!="" && fk_arb_etat!="" && fk_stadedev!="" && fk_situation!="" && fk_port!="" && fk_pied!="" && fk_revetement!="" && remarquable!="" && age_estim!="" && fk_prec_estim!="" && fk_nomtech!=""){
+        request = 'longitude='+longitude+'&latitude='+latitude+'&haut_tot='+haut_tot+'&haut_tronc='+haut_tronc+'&tronc_diam='+tronc_diam+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied+'&fk_revetement='+fk_revetement+'&remarquable='+remarquable+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech;
 
-    request = 'longitude='+longitude+'&latitude='+latitude+'&haut_tot='+haut_tot+'&haut_tronc='+haut_tronc+'&tronc_diam='+tronc_diam+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied+'&fk_revetement='+fk_revetement+'&remarquable='+remarquable+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech;
-
-    console.log(request)
-    //ajaxRequest('POST','../php/request.php/form/',confirmation,request);
+        ajaxRequest('POST','../lib/request.php/form/',confirm,request);
+    }else{
+        console.log("false");
+    }
 }
 
 
