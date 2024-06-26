@@ -20,34 +20,6 @@
         }
     }
 
-
-    function dbInsertNewArb($db, $longitude, $latitude, $haut_tot, $haut_tronc, $tronc_diam, $fk_arb_etat, $fk_stadedev, $fk_situation, $fk_port, $fk_pied, $fk_revetement, $remarquable, $age_estim, $fk_prec_estim, $fk_nomtech){
-        try {
-            $stmt = $db->prepare("INSERT INTO arbre (longitude, latitude, haut_tot, haut_tronc, tronc_diam, fk_arb_etat, fk_stadedev, fk_situation, fk_port, fk_pied, fk_revetement, remarquable, age_estim, fk_prec_estim, fk_nomtech, mail) VALUES (:longitude, :latitude, :haut_tot, :haut_tronc, :tronc_diam, :fk_arb_etat, :fk_stadedev, :fk_situation, :fk_port, :fk_pied, :fk_revetement, :remarquable, :age_estim, :fk_prec_estim, :fk_nomtech, 'admin@admin')");
-            $stmt->bindParam(':longitude', $longitude);
-            $stmt->bindParam(':latitude', $latitude);
-            $stmt->bindParam(':haut_tot', $haut_tot);
-            $stmt->bindParam(':haut_tronc', $haut_tronc);
-            $stmt->bindParam(':tronc_diam', $tronc_diam);
-            $stmt->bindParam(':fk_arb_etat', $fk_arb_etat);
-            $stmt->bindParam(':fk_stadedev', $fk_stadedev);
-            $stmt->bindParam(':fk_situation', $fk_situation);
-            $stmt->bindParam(':fk_port', $fk_port);
-            $stmt->bindParam(':fk_pied', $fk_pied);
-            $stmt->bindParam(':fk_revetement', $fk_revetement);
-            $stmt->bindParam(':remarquable', $remarquable);
-            $stmt->bindParam(':age_estim', $age_estim);
-            $stmt->bindParam(':fk_prec_estim', $fk_prec_estim);
-            $stmt->bindParam(':fk_nomtech', $fk_nomtech);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $exception){
-            error_log('Request error: '. $exception->getMessage());
-            return false;
-        }
-    }
-
-
     function dbGetUser($db,$mail,$mdp){
         try{
             $request = 'SELECT * FROM users where mail=:mail';
@@ -56,7 +28,7 @@
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             if(!empty($result) && password_verify($mdp,$result['mdp'])){
-                return array($result['nom'],$result['prenom']);
+                return array($result['mail'],$result['nom'],$result['prenom']);
             }else{
                 return "error";
             }
@@ -104,6 +76,46 @@
         }
     } 
 
+
+
+    function dbInsertNewArb($db, $longitude, $latitude, $haut_tot, $haut_tronc, $tronc_diam, $fk_arb_etat, $fk_stadedev, $fk_situation, $fk_port, $fk_pied, $fk_revetement, $remarquable, $age_estim, $fk_prec_estim, $fk_nomtech, $mail){
+        try {
+            $stmt = $db->prepare("INSERT INTO arbre (longitude, latitude, haut_tot, haut_tronc, tronc_diam, fk_arb_etat, fk_stadedev, fk_situation, fk_port, fk_pied, fk_revetement, remarquable, age_estim, fk_prec_estim, fk_nomtech, mail) VALUES (:longitude, :latitude, :haut_tot, :haut_tronc, :tronc_diam, :fk_arb_etat, :fk_stadedev, :fk_situation, :fk_port, :fk_pied, :fk_revetement, :remarquable, :age_estim, :fk_prec_estim, :fk_nomtech, :mail)");
+            $stmt->bindParam(':longitude', $longitude);
+            $stmt->bindParam(':latitude', $latitude);
+            $stmt->bindParam(':haut_tot', $haut_tot);
+            $stmt->bindParam(':haut_tronc', $haut_tronc);
+            $stmt->bindParam(':tronc_diam', $tronc_diam);
+            $stmt->bindParam(':fk_arb_etat', $fk_arb_etat);
+            $stmt->bindParam(':fk_stadedev', $fk_stadedev);
+            $stmt->bindParam(':fk_situation', $fk_situation);
+            $stmt->bindParam(':fk_port', $fk_port);
+            $stmt->bindParam(':fk_pied', $fk_pied);
+            $stmt->bindParam(':fk_revetement', $fk_revetement);
+            $stmt->bindParam(':remarquable', $remarquable);
+            $stmt->bindParam(':age_estim', $age_estim);
+            $stmt->bindParam(':fk_prec_estim', $fk_prec_estim);
+            $stmt->bindParam(':fk_nomtech', $fk_nomtech);
+            $stmt->bindParam(':mail', $mail);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $exception){
+            error_log('Request error: '. $exception->getMessage());
+            return false;
+        }
+    }
+    
+    function dbGetArbres($db){
+        try{
+            $request = "SELECT * from arbre ORDER BY fk_nomtech";
+            $statement = $db->prepare($request);
+            $statement->execute();
+            return $statement->fetchall(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    } 
 
 
 ?>

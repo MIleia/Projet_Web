@@ -2,6 +2,7 @@ if(sessionStorage.getItem('connecté')=='True'){
     window.location.href = "/pages/accueil.html";
 }
 
+var mail = "";
 var nom = "";
 var prenom = "";
 
@@ -10,6 +11,7 @@ function confirm(data){
         inner = `<span style="color:red">Adresse mail déjà utilisée</span>`;
         document.getElementById("inscrire_error").innerHTML = inner;
     }else{
+        sessionStorage.setItem('mail', mail);
         sessionStorage.setItem('nom', nom);
         sessionStorage.setItem('prenom', prenom);
         sessionStorage.setItem('connecté', 'True');

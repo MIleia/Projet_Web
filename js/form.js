@@ -1,10 +1,16 @@
 if(sessionStorage.getItem('connecté')!='True'){
     window.location.href = "../connection.html";
+}else{
+    prenom = sessionStorage.getItem('prenom');
+    console.log(sessionStorage.getItem('connecté'))
+    nom = sessionStorage.getItem('nom');
+    inner = prenom+' '+nom;
+    document.getElementById("profil").innerHTML = inner;
 }
 
 function confirm(data){
-    inner =`Arbre bien ajouté`
-    document.getElementById("ajout_succes").innerHTML = inner;
+    inner =`<span style="color:#198754;">Arbre bien ajouté<span>`
+    document.getElementById("ajout_succerror").innerHTML = inner;
 }
 
 function form(){
@@ -39,12 +45,15 @@ function form(){
     fk_nomtech = document.getElementById("fk_nomtech").value;
     document.getElementById('fk_nomtech').value = "";
     
+    mail = sessionStorage.getItem('mail');
+
     if(longitude!="" && latitude!="" && haut_tot!="" && haut_tronc!="" && tronc_diam!="" && fk_arb_etat!="" && fk_stadedev!="" && fk_situation!="" && fk_port!="" && fk_pied!="" && fk_revetement!="" && remarquable!="" && age_estim!="" && fk_prec_estim!="" && fk_nomtech!=""){
-        request = 'longitude='+longitude+'&latitude='+latitude+'&haut_tot='+haut_tot+'&haut_tronc='+haut_tronc+'&tronc_diam='+tronc_diam+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied+'&fk_revetement='+fk_revetement+'&remarquable='+remarquable+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech;
+        request = 'longitude='+longitude+'&latitude='+latitude+'&haut_tot='+haut_tot+'&haut_tronc='+haut_tronc+'&tronc_diam='+tronc_diam+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied+'&fk_revetement='+fk_revetement+'&remarquable='+remarquable+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech+'&mail='+mail;
 
         ajaxRequest('POST','../lib/request.php/form/',confirm,request);
     }else{
-        console.log("false");
+        inner =`<span style="color:red;">Veuillez renseigner tous les champs de textes<span>`
+        document.getElementById("ajout_succerror").innerHTML = inner;
     }
 }
 

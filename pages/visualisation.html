@@ -4,11 +4,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- <link href="css.css" rel="stylesheet"> -->
     
     <title>Visualisation</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="../js/ajax.js" defer></script>
+    <script src="../js/visualisation.js" defer></script>
+
+    <style>
+        .thead-fixed th {
+            position: sticky;
+            top: 0;
+            background-color: #d4edda;
+            z-index: 1;
+        }
+    </style>
 
 </head>
 
@@ -33,9 +44,50 @@
                 <a class="nav-link active" href="visualisation.html">Visualisation des arbres</a>
               </li>
             </ul>
+            <div class="fw-bold" id="profil">
+
+            </div>
           </div>
         </div>
     </nav>
+
+    <div class="container">
+        <br><br>   
+        <div class="row">
+            <h3 class="form-outline mb-4 text-center">Tableau des arbres</h3>
+            <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
+                <div style="min-width:2000px; overflow-x:auto;">
+                    <table class="table table-success table-striped">
+                        <thead class="thead-fixed">
+                            <tr>
+                                <th></th>
+                                <th scope="col" class="align-middle">Nom de l'espèce</th>
+                                <th scope="col" class="align-middle">Hauteur totale</th>
+                                <th scope="col" class="align-middle">Hauteur du tronc</th>
+                                <th scope="col" class="align-middle">Diamètre du tronc</th>
+                                <th scope="col" class="align-middle">Remarquable</th>
+                                <th scope="col" class="align-middle">Longitude</th>
+                                <th scope="col" class="align-middle">Latitude</th>
+                                <th scope="col" class="align-middle">État de l'arbre</th>
+                                <th scope="col" class="align-middle">Stade de dév.</th>
+                                <th scope="col" class="align-middle">Situation</th>
+                                <th scope="col" class="align-middle">Port</th>
+                                <th scope="col" class="align-middle">Pied</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tab">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="map" style="width: 600px; height: 600px;">
+
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>

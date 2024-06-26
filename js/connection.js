@@ -7,8 +7,9 @@ function confirm(data){
         inner = `<span style="color:red">Adresse mail ou mot de passe incorrect</span>`;
         document.getElementById("connect_error").innerHTML = inner;
     }else{
-        sessionStorage.setItem('nom', data[0]);
-        sessionStorage.setItem('prenom', data[1]);
+        sessionStorage.setItem('mail', data[0]);
+        sessionStorage.setItem('nom', data[1]);
+        sessionStorage.setItem('prenom', data[2]);
         sessionStorage.setItem('connecté', 'True');
         window.location.href = "pages/accueil.html";
     }
