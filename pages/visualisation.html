@@ -11,15 +11,7 @@
 
     <script src="../js/ajax.js" defer></script>
     <script src="../js/visualisation.js" defer></script>
-
-    <style>
-        .thead-fixed th {
-            position: sticky;
-            top: 0;
-            background-color: #d4edda;
-            z-index: 1;
-        }
-    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 </head>
 
@@ -53,12 +45,12 @@
 
     <div class="container">
         <br><br>   
-        <div class="row">
+        <div class="row mb-4">
             <h3 class="form-outline mb-4 text-center">Tableau des arbres</h3>
-            <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
-                <div style="min-width:2000px; overflow-x:auto;">
-                    <table class="table table-success table-striped">
-                        <thead class="thead-fixed">
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                <div style="min-width: 2000px; overflow-x: auto;">
+                    <table class="table table-striped table-hover">
+                        <thead>
                             <tr>
                                 <th></th>
                                 <th scope="col" class="align-middle">Nom de l'espèce</th>
@@ -83,10 +75,25 @@
             </div>
         </div>
         <div class="row">
-            <div id="map" style="width: 600px; height: 600px;">
+            <div class="col d-flex justify-content-center">
+                <button type="submit" class="btn btn-success btn-block mb-4" id="predict_clusters">Prédire les clusters</button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button type="submit" class="btn btn-success btn-block mb-4" id="predict_age">Prédire l'âge de l'arbre</button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button type="submit" class="btn btn-success btn-block mb-4" id="predict_essouche">Prédire le déracinement</button>
+            </div>
+        </div>
+        <hr>
+        <br>  
+        <div class="row">
+            <h3 class="form-outline mb-4 text-center">Carte des arbres</h3>
+            <div id="map" style="width: 100%; height: 600px;">
 
             </div>
         </div>
+        <br><br>   
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

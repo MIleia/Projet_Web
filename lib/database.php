@@ -117,5 +117,16 @@
         }
     } 
 
-
+    function dbGetArbre($db,$id){
+        try{
+            $request = "SELECT * from arbre WHERE id=:id";
+            $statement = $db->prepare($request);
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    } 
 ?>

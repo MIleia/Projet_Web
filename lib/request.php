@@ -22,6 +22,42 @@
         if($_SERVER['REQUEST_METHOD']=="GET"){
             $request = dbGetArbres($db);
         }
+    }elseif($requesttype=="predict_age"){
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $request = dbGetArbre($db,$_GET['id']);
+            $myfile = fopen("../ressources/F2/arbre.csv", "w");
+            if (!$myfile) {
+                $request = "not open";
+            }else{
+                $list = array (
+                    array("longitude", "latitude" ,"haut_tot", "haut_tronc", "tronc_diam", "fk_prec_estim"),
+                    array($request['longitude'], $request['latitude'] ,$request['haut_tot'], $request['haut_tronc'], $request['tronc_diam'], $request['fk_prec_estim'])
+                  );
+                foreach ($list as $line) {
+                    fputcsv($myfile, $line);
+                }
+                fclose($myfile);
+                exec('python3 ../ressources/F2/script_2.py ../ressources/F2/arbre.csv ../ressources/F2/F2_RandomForestClassifier.pkl');
+            }
+        }
+    }elseif($requesttype=="predict_essouche"){
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $request = dbGetArbre($db,$_GET['id']);
+            $myfile = fopen("../ressources/F3/arbre.csv", "w");
+            if (!$myfile) {
+                $request = "not open";
+            }else{
+                $list = array (
+                    array("longitude", "latitude" ,"fk_port", "fk_pied", "fk_revetement", "fk_situation","age_estim"),
+                    array($request['longitude'], $request['latitude'] ,$request['fk_port'], $request['fk_pied'], $request['fk_revetement'], $request['fk_situation'], $request['age_estim'])
+                  );
+                foreach ($list as $line) {
+                    fputcsv($myfile, $line);
+                }
+                fclose($myfile);
+                exec('python3 ../ressources/F3/script_3.py ../ressources/F3/arbre.csv ../ressources/F3/F3_RandomForestClassifier.pkl');
+            }
+        }
     }
 
     echo json_encode($request);
