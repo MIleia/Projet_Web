@@ -106,7 +106,7 @@ function gopredict_essouche(data){
     sessionStorage.setItem('fk_revetement', data['fk_revetement']);
     sessionStorage.setItem('fk_situation', data['fk_situation']);
     sessionStorage.setItem('age_estim', data['age_estim']);
-    window.location.href = "predict_essouche*.html";
+    window.location.href = "predict_essouche.html";
 }
 function predict_essouche(){
     id = document.querySelector('input[name=choix_arbre]:checked');

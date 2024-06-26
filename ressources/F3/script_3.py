@@ -1,10 +1,13 @@
 import pandas as pd
-import joblib
+import pickle
 import sys
 import json
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import OrdinalEncoder
 
 arbre = pd.read_csv(sys.argv[1])
-model = joblib.load(sys.argv[2])
+with open(sys.argv[2],'rb') as f:
+    model = pickle.load(f)
 #arbre = pd.read_csv('arbre3.csv')
 #model = joblib.load('F3_RandomForestClassifier.pkl')
 
@@ -12,10 +15,12 @@ model = joblib.load(sys.argv[2])
 
 for col in arbre.columns:
     if((arbre[col]).dtypes == 'object'):
-        Enc = joblib.load("../ressources/F3/F3_Enc_"+col+".pkl")
+        with open("../ressources/F3/F3_Enc_"+col+".pkl",'rb') as f:
+            Enc = pickle.load(f)
         arbre[col] = Enc.transform(arbre[[col]])
 
-scaler = joblib.load('../ressources/F3/F3_Scaler.pkl')
+with open('../ressources/F3/F3_Scaler.pkl','rb') as f:
+    scaler = pickle.load(f)
 columns_of_interest = ['longitude', 'latitude','fk_port', 'fk_pied', 'fk_revetement', 'fk_situation', 'age_estim']
 scaled_numerical_data = scaler.transform(arbre[columns_of_interest])
 scaled_numerical_df = pd.DataFrame(scaled_numerical_data, columns=columns_of_interest)

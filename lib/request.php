@@ -36,7 +36,7 @@
                 foreach ($list as $line) {
                     fputcsv($myfile, $line);
                 }
-                fclose($myfile);
+                // fclose($myfile);
                 exec('python3 ../ressources/F2/script_2.py ../ressources/F2/arbre.csv ../ressources/F2/F2_RandomForestClassifier.pkl');
             }
         }
@@ -54,7 +54,8 @@
                 foreach ($list as $line) {
                     fputcsv($myfile, $line);
                 }
-                fclose($myfile);
+                // fclose($myfile);
+                
                 exec('python3 ../ressources/F3/script_3.py ../ressources/F3/arbre.csv ../ressources/F3/F3_RandomForestClassifier.pkl');
             }
         }

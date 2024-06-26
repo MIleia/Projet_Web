@@ -22,7 +22,12 @@ document.getElementById("tab_essouche").innerHTML = inner;
 fetch('../ressources/F3/Result.json')
     .then((response) => response.json())
     .then((json) => {
-        console.log(json)
+        if(json['essouche']==0){
+            inner = `<h4>Arbre non déraciné</h4>`;
+        }else{
+            inner = `<h4>Arbre déraciné</h4>`;
+        }
+        document.getElementById("response").innerHTML = inner;
     });
 
 
