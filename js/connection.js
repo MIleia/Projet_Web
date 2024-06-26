@@ -26,11 +26,11 @@ function connection(){
             ajaxRequest('GET','../lib/request.php/connection?mail='+mail+'&mdp='+mdp,confirm);
         }else{
             inner = `<span style="color:red;">Adresse mail incorrect</span>`;
-            document.getElementById("inscrire_error").innerHTML = inner;
+            document.getElementById("connect_error").innerHTML = inner;
         }
     }else{
         inner = `<span style="color:red;">Veuillez renseigner tous les champs de textes</span>`;
-        document.getElementById("inscrire_error").innerHTML = inner;
+        document.getElementById("connect_error").innerHTML = inner;
     }
 }   
 
