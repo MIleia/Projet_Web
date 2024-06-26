@@ -1,6 +1,6 @@
 import pandas as pd
 import psycopg2
-import hashlib
+import bcrypt
 
 # Connexion à la BDD
 conn = psycopg2.connect(
@@ -13,9 +13,12 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 
 # Insertion de l'admin
-mdp = "admin"
+def hash_password(password):
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-mdp_hash = hashlib.sha256(mdp.encode()).hexdigest()
+
+mdp = "admin"
+mdp_hash = hash_password(mdp)
 cursor.execute("""INSERT INTO Users (mail, nom, prenom, mdp) VALUES ('admin@admin', 'admin', 'admin', %s);""", (mdp_hash,))
 
 # Insertion des arbres
