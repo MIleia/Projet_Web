@@ -2,13 +2,16 @@ if(sessionStorage.getItem('connecté')!='True'){
     window.location.href = "../connection.html";
 }else{
     prenom = sessionStorage.getItem('prenom');
-    console.log(sessionStorage.getItem('connecté'))
     nom = sessionStorage.getItem('nom');
     inner = prenom+' '+nom;
     document.getElementById("profil").innerHTML = inner;
+    if(localStorage.getItem('remplir')=='True'){
+        inner =`<button type="submit" class="btn btn-success btn-block mb-4" id="remplir" disabled>Remplir avec Data_Arbre.csv</button>`;
+        document.getElementById("bouton_remplir").innerHTML = inner;
+    }
 }
 
-function confirm(data){
+function confirm(){
     inner =`<span style="color:#198754;">Arbre bien ajouté<span>`
     document.getElementById("ajout_succerror").innerHTML = inner;
 }
@@ -57,13 +60,27 @@ function form(){
     }
 }
 
-
-
+function confirmr(){
+    inner =`<span style="color:#198754;">Arbres bien ajoutés<span>`
+    document.getElementById("ajout_succerror").innerHTML = inner;
+}
+function remplir(){
+    inner =`<button type="submit" class="btn btn-success btn-block mb-4" id="remplir" disabled>Remplir avec Data_Arbre.csv</button>`;
+    document.getElementById("bouton_remplir").innerHTML = inner;
+    localStorage.setItem('remplir', 'True');
+    request = 'mail='+sessionStorage.getItem('mail');
+    ajaxRequest('POST','../lib/request.php/remplir/',confirmr,request);
+}
+//localStorage.setItem('remplir', '');
 
 function listener(){
     document.getElementById("ajout").addEventListener("click", function(event){
         event.preventDefault();
         form();
+    });
+    document.getElementById("remplir").addEventListener("click", function(event){
+        event.preventDefault();
+        remplir();
     });
 }
 listener();

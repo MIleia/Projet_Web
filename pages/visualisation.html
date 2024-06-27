@@ -45,27 +45,60 @@
     </nav>
 
     <div class="container">
-        <br><br>   
+        <br><br>
+        <h3 class="form-outline mb-4 text-center">Tableau des arbres</h3>
+        <br>
         <div class="row mb-4">
-            <h3 class="form-outline mb-4 text-center">Tableau des arbres</h3>
+            <div class="col">
+                <label class="form-label">Remarquable</label>
+                <select class="form-select" id="remarquable">
+                    <option value="Tous">Tous</option>
+                    <option value="Oui">Oui</option>
+                    <option value="Non">Non</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label">État de l'arbre</label>
+                <select class="form-select" id="fk_arb_etat">
+                    <option value="Tous">Tous</option>
+                    <option value="EN PLACE">En place</option>
+                    <option value="ABATTU">Abattu</option>
+                    <option value="Essouché">Essouché</option>
+                    <option value="Non essouché">Non essouché</option>
+                    <option value="REMPLACÉ">Remplacé</option>
+                    <option value="SUPPRIMÉ">Supprimé</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label">Stade de développement</label>
+                <select class="form-select" id="fk_stadedev">
+                    <option value="Tous">Tous</option>
+                    <option value="Jeune">Jeune</option>
+                    <option value="Adulte">Adulte</option>
+                    <option value="vieux">Vieux</option>
+                    <option value="senescent">Senescent</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label">Situation</label>
+                <select class="form-select" id="fk_situation">
+                    <option value="Tous">Tous</option>
+                    <option value="Alignement">Alignement</option>
+                    <option value="Groupe">Groupe</option>
+                    <option value="Isolé">Isolé</option>
+                </select>
+            </div>
+            <div class="col d-flex justify-content-center align-items-end">
+                <button type="submit" class="btn btn-primary" id="trie">Trier</button>
+            </div>
+        </div>   
+        <div class="row mb-4">
             <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                 <div style="min-width: 2000px; overflow-x: auto;">
                     <table class="table table-striped table-hover">
                         <thead>
-                            <tr>
-                                <th></th>
-                                <th scope="col" class="align-middle">Nom de l'espèce</th>
-                                <th scope="col" class="align-middle">Hauteur totale</th>
-                                <th scope="col" class="align-middle">Hauteur du tronc</th>
-                                <th scope="col" class="align-middle">Diamètre du tronc</th>
-                                <th scope="col" class="align-middle">Remarquable</th>
-                                <th scope="col" class="align-middle">Longitude</th>
-                                <th scope="col" class="align-middle">Latitude</th>
-                                <th scope="col" class="align-middle">État de l'arbre</th>
-                                <th scope="col" class="align-middle">Stade de dév.</th>
-                                <th scope="col" class="align-middle">Situation</th>
-                                <th scope="col" class="align-middle">Port</th>
-                                <th scope="col" class="align-middle">Pied</th>
+                            <tr id="th">
+
                             </tr>
                         </thead>
                         <tbody id="tab">
@@ -85,6 +118,9 @@
             <div class="col d-flex justify-content-center">
                 <button type="submit" class="btn btn-success btn-block mb-4" id="predict_essouche">Prédire le déracinement</button>
             </div>
+        </div>
+        <div id="error_predict">
+
         </div>
         <hr>
         <br>  

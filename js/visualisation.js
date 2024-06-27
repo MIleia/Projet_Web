@@ -14,7 +14,7 @@ function printMap(arbres) {
         <b>${arbre.fk_nomtech}</b><br>
         Hauteur Totale: ${arbre.haut_tot} m<br>
         Hauteur Tronc: ${arbre.haut_tronc} m<br>
-        Diamètre Tronc: ${arbre.tronc_diam} m<br>
+        Diamètre Tronc: ${arbre.tronc_diam} cm<br>
         Remarquable: ${arbre.remarquable ? 'Oui' : 'Non'}<br>
         État: ${arbre.fk_arb_etat}<br>
         Stade de Développement: ${arbre.fk_stadedev}<br>
@@ -73,12 +73,56 @@ function printtab(data){
                     </tr>`;
     }
     document.getElementById("tab").innerHTML = inner;
-    
+
+    remarquable = document.getElementById("remarquable").value;
+    fk_arb_etat = document.getElementById("fk_arb_etat").value;
+    fk_stadedev = document.getElementById("fk_stadedev").value;
+    fk_situation = document.getElementById("fk_situation").value;
+    inner = `   <th></th>
+                <th scope="col" class="align-middle">Nom de l'espèce</th>
+                <th scope="col" class="align-middle">Hauteur totale</th>
+                <th scope="col" class="align-middle">Hauteur du tronc</th>
+                <th scope="col" class="align-middle">Diamètre du tronc</th>
+                <th scope="col" class="align-middle" id="clremarquable" value="`+remarquable+`">Remarquable</th>
+                <th scope="col" class="align-middle">Longitude</th>
+                <th scope="col" class="align-middle">Latitude</th>
+                <th scope="col" class="align-middle" id="clfk_arb_etat" value="`+fk_arb_etat+`">État de l'arbre</th>
+                <th scope="col" class="align-middle" id="clfk_stadedev" value="`+fk_stadedev+`">Stade de dév.</th>
+                <th scope="col" class="align-middle" id="clfk_situation" value="`+fk_situation+`">Situation</th>
+                <th scope="col" class="align-middle">Port</th>
+                <th scope="col" class="align-middle">Pied</th>`;
+    document.getElementById("th").innerHTML = inner;
+
+
     printMap(data);
 }
 ajaxRequest('GET','../lib/request.php/tab',printtab);
 
 
+function trier(){
+    remarquable = document.getElementById("remarquable").value;
+    fk_arb_etat = document.getElementById("fk_arb_etat").value;
+    fk_stadedev = document.getElementById("fk_stadedev").value;
+    fk_situation = document.getElementById("fk_situation").value;
+
+    ajaxRequest('GET','../lib/request.php/tabmodif?remarquable='+remarquable+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation,printtab);
+}
+
+
+
+
+function gopredict_clusters(data){
+    sessionStorage.setItem('data', JSON.stringify(data));
+    window.location.href = "predict_clusters.html";
+}
+function predict_clusters(){
+    remarquable = document.getElementById("clremarquable").getAttribute("value");
+    fk_arb_etat = document.getElementById("clfk_arb_etat").getAttribute("value");
+    fk_stadedev = document.getElementById("clfk_stadedev").getAttribute("value");
+    fk_situation = document.getElementById("clfk_situation").getAttribute("value");
+
+    ajaxRequest('GET','../lib/request.php/predict_cluster?remarquable='+remarquable+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation,gopredict_clusters);
+}
 
 function gopredict_age(data){
     sessionStorage.setItem('longitude', data['longitude']);
@@ -92,7 +136,8 @@ function gopredict_age(data){
 function predict_age(){
     id = document.querySelector('input[name=choix_arbre]:checked');
     if (id == null){
-        console.log("error")
+        inner = `<span style="color:red">Veuillez sélectionner un arbre</span>`;
+        document.getElementById("error_predict").innerHTML = inner;
     }else{
         ajaxRequest('GET','../lib/request.php/predict_age?id='+id.value,gopredict_age);
     }
@@ -111,14 +156,25 @@ function gopredict_essouche(data){
 function predict_essouche(){
     id = document.querySelector('input[name=choix_arbre]:checked');
     if (id == null){
-        console.log("error")
+        inner = `<span style="color:red">Veuillez sélectionner un arbre</span>`;
+        document.getElementById("error_predict").innerHTML = inner;
     }else{
         ajaxRequest('GET','../lib/request.php/predict_essouche?id='+id.value,gopredict_essouche);
     }
 }
 
 
+
+
 function listener(){
+    document.getElementById("trie").addEventListener("click", function(event){
+        event.preventDefault();
+        trier();
+    });
+    document.getElementById("predict_clusters").addEventListener("click", function(event){
+        event.preventDefault();
+        predict_clusters();
+    });
     document.getElementById("predict_age").addEventListener("click", function(event){
         event.preventDefault();
         predict_age();
