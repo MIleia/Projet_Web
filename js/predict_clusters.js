@@ -37,7 +37,7 @@ function printMap(res){
             case 1:
                 taille = "Moyen";
                 break;
-            case 3:
+            case 2:
                 taille = "Grand";
                 break;
         }

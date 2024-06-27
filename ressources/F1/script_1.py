@@ -19,11 +19,11 @@ for col in arbre.columns:
 
 #=================================================Sélection=du==cluster================================================#
 resp = []
-for i,row in arbre.iterrows():
+for j,arb in arbre.iterrows():
     Y = []
     for i,row in centroides.iterrows():
         value = [row.iloc[1],row.iloc[2],row.iloc[3],row.iloc[4]]
-        Y.append(np.sqrt(np.sum((arbre.values[0] - value) ** 2)))
+        Y.append(np.sqrt(np.sum((arbre.values[j] - value) ** 2)))
     min = [Y[0],0]
     for i in range(len(Y)):
         if(min[0]>Y[i]):
