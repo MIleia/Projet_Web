@@ -1,1 +1,1 @@
-SELECT DISTINCT fk_nomtech FROM arbre ORDER BY fk_nomtech;
+Drop TABLE IF EXISTS Arbre;

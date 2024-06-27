@@ -76,8 +76,15 @@ function remplir(){
     request = 'mail='+sessionStorage.getItem('mail');
     ajaxRequest('POST','../lib/request.php/remplir/',confirmr,request);
 }
-//localStorage.setItem('remplir', '');
+//localStorage.setItem('remplir', 'False');
 
+function vider(){
+    inner =`<span style="color:#198754;">Arbres bien supprimés<span>`
+    document.getElementById("ajout_succerror").innerHTML = inner;
+    localStorage.setItem('remplir', 'False');
+    inner =`<button type="submit" class="btn btn-success btn-block mb-4" id="remplir">Remplir avec Data_Arbre.csv</button>`;
+    document.getElementById("bouton_remplir").innerHTML = inner;
+}
 
 
 
@@ -92,7 +99,6 @@ ajaxRequest('GET','../lib/request.php/autocomp',autocompletion);
 
 
 
-
 function listener(){
     document.getElementById("ajout").addEventListener("click", function(event){
         event.preventDefault();
@@ -101,6 +107,10 @@ function listener(){
     document.getElementById("remplir").addEventListener("click", function(event){
         event.preventDefault();
         remplir();
+    });
+    document.getElementById("vider").addEventListener("click", function(event){
+        event.preventDefault();
+        ajaxRequest('DELETE','../lib/request.php/vider',vider);
     });
 }
 listener();

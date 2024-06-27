@@ -24,6 +24,8 @@
             $exec = 'python3 ../ressources/remplissage.py '.$_POST['mail'];
             exec($exec);
         }
+    }elseif($requesttype=="vider"){
+        $request = dbDelete($db);
     }elseif($requesttype=="autocomp"){
         if($_SERVER['REQUEST_METHOD']=="GET"){
             $request = dbGetNoms($db);

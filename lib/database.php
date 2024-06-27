@@ -118,6 +118,17 @@
     } 
 
 
+    function dbDelete($db){
+        try{
+            $stmt = $db->prepare("DELETE FROM arbre");
+            $stmt->execute();
+            return true;
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    } 
+
 
     function dbGetArbres($db){
         try{
