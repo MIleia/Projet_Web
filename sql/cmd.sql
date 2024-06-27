@@ -1,1 +1,1 @@
-SELECT * from arbre WHERE remarquable IN ('Oui','Non') AND fk_arb_etat IN ('EN PLACE','ABATTU','Essouch\u00e9','Non essouch\u00e9','REMPLAC\u00c9','SUPPRIM\u00c9') AND fk_stadedev IN ('Jeune','Adulte','vieux','senescent') AND fk_situation IN ('Alignement','Groupe','Isol\u00e9') ORDER BY fk_nomtech;
+SELECT DISTINCT fk_nomtech FROM arbre ORDER BY fk_nomtech;

@@ -51,9 +51,14 @@ function form(){
     mail = sessionStorage.getItem('mail');
 
     if(longitude!="" && latitude!="" && haut_tot!="" && haut_tronc!="" && tronc_diam!="" && fk_arb_etat!="" && fk_stadedev!="" && fk_situation!="" && fk_port!="" && fk_pied!="" && fk_revetement!="" && remarquable!="" && age_estim!="" && fk_prec_estim!="" && fk_nomtech!=""){
-        request = 'longitude='+longitude+'&latitude='+latitude+'&haut_tot='+haut_tot+'&haut_tronc='+haut_tronc+'&tronc_diam='+tronc_diam+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied+'&fk_revetement='+fk_revetement+'&remarquable='+remarquable+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech+'&mail='+mail;
+        if(haut_tot<0 || haut_tronc<0 || tronc_diam<0 || age_estim<0 || fk_prec_estim<0){
+            inner =`<span style="color:red;">Veuillez renseigner des valeurs positives<span>`
+            document.getElementById("ajout_succerror").innerHTML = inner;
+        }else{
+            request = 'longitude='+longitude+'&latitude='+latitude+'&haut_tot='+haut_tot+'&haut_tronc='+haut_tronc+'&tronc_diam='+tronc_diam+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&fk_port='+fk_port+'&fk_pied='+fk_pied+'&fk_revetement='+fk_revetement+'&remarquable='+remarquable+'&age_estim='+age_estim+'&fk_prec_estim='+fk_prec_estim+'&fk_nomtech='+fk_nomtech+'&mail='+mail;
 
-        ajaxRequest('POST','../lib/request.php/form/',confirm,request);
+            ajaxRequest('POST','../lib/request.php/form/',confirm,request);
+        }
     }else{
         inner =`<span style="color:red;">Veuillez renseigner tous les champs de textes<span>`
         document.getElementById("ajout_succerror").innerHTML = inner;
@@ -72,6 +77,21 @@ function remplir(){
     ajaxRequest('POST','../lib/request.php/remplir/',confirmr,request);
 }
 //localStorage.setItem('remplir', '');
+
+
+
+
+function autocompletion(data){
+    inner = "";
+    for(let i=0; i<data.length; i++){
+        inner += `<option value="`+data[i]["fk_nomtech"]+`">`+data[i]["fk_nomtech"]+`</option>`;
+    }
+    document.getElementById("noms").innerHTML = inner;
+}
+ajaxRequest('GET','../lib/request.php/autocomp',autocompletion);
+
+
+
 
 function listener(){
     document.getElementById("ajout").addEventListener("click", function(event){
