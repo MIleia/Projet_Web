@@ -1,6 +1,6 @@
-# Projet Web
+# Projet WEB
 ## Description
-Ce site est un site 
+Ce site permet d'ajouter et de visualiser des arbres grâce à des requêtes ajax (GET & POST) qui communiquent avec une base de donnée postgresql. Il y a aussi des prédictions autour des arbres sont faites avec des scripts pythons.
 
 ## Création du site
 ### Installation des modules nécéssaires :
@@ -59,5 +59,6 @@ sudo systemctl start apache2
 ```
 
 ## Utilisation du site
-Après connection sur le serveur, vous êtes automatiquement rediriger vers une page de connection.
-Vous avez la possibilité de se connecté avec une adresse mail existante ou de créer un compte sinon. Après connection ou inscription vous êtes redirigé vers une page 
+Après connection au serveur, vous êtes automatiquement rediriger vers une page de connection.
+Vous avez la possibilité de se connecté avec une adresse mail existante ou de créer un compte sinon. Après connection ou inscription vous êtes redirigé vers une page d'accueil, d'où il est possible d'accèder à une page d'insertion des arbres ou de visualisation.
+Sur la page d'ajout des arbres, vous pourrez remplir un formulaire pour ajouter un arbre où même ajouter l'entièreté des arbres du fichier Data_Arbre.csv. Et sur la page de visualisation des arbres, vous pourrez visualiser tous les arbres (avec des critères sélectionnables) sur un tableau et sur une carte. À partir de ce dernier, vous pourrez prédire les clusters des arbres sélectionnés, ou même prédire l'âge ou le déracinement d'un arbre spécifique.
