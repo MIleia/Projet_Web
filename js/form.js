@@ -78,14 +78,17 @@ function remplir(){
 }
 //localStorage.setItem('remplir', 'False');
 
-function vider(){
+function confirmv(){
     inner =`<span style="color:#198754;">Arbres bien supprimés<span>`
     document.getElementById("ajout_succerror").innerHTML = inner;
     localStorage.setItem('remplir', 'False');
     inner =`<button type="submit" class="btn btn-success btn-block mb-4" id="remplir">Remplir avec Data_Arbre.csv</button>`;
     document.getElementById("bouton_remplir").innerHTML = inner;
+    listener();
 }
-
+function vider(){
+    ajaxRequest('DELETE','../lib/request.php/vider',confirmv);
+}
 
 
 function autocompletion(data){
@@ -110,7 +113,7 @@ function listener(){
     });
     document.getElementById("vider").addEventListener("click", function(event){
         event.preventDefault();
-        ajaxRequest('DELETE','../lib/request.php/vider',vider);
+        vider();
     });
 }
 listener();
