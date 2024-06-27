@@ -2,6 +2,8 @@
 ## Description
 Ce site permet d'ajouter et de visualiser des arbres grâce à des requêtes ajax (GET & POST) qui communiquent avec une base de donnée postgresql. Il y a aussi des prédictions autour des arbres sont faites avec des scripts pythons.
 
+Lien Figma : https://www.figma.com/design/m3tta7uDAs9CFLbzkOjDHs/Projet_web?node-id=5495-3&t=nvaIvttilnzvkttp-1
+
 ## Création du site
 ### Installation des modules nécéssaires :
 ```bash
