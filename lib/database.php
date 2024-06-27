@@ -105,6 +105,20 @@
         }
     }
     
+    function dbGetNoms($db){
+        try{
+            $request = "SELECT DISTINCT fk_nomtech FROM arbre ORDER BY fk_nomtech";
+            $statement = $db->prepare($request);
+            $statement->execute();
+            return $statement->fetchall(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    } 
+
+
+
     function dbGetArbres($db){
         try{
             $request = "SELECT * from arbre ORDER BY fk_nomtech";
