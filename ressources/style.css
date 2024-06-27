@@ -1,0 +1,30 @@
+footer {
+    background-color: #198754;
+    color: #ffffff;
+    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+
+    /* reduire la taille en y*/
+    height: 45px;
+
+
+}
+
+.footer-icons {
+    display: inline-block;
+    margin: 0 1px;
+}
+
+.dev-link {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.dev-link:hover {
+    text-decoration: underline;
+}

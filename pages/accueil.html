@@ -4,12 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- <link href="css.css" rel="stylesheet"> -->
-    
     <title>Accueil</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="../ressources/style.css">
 </head>
 
 <body>
@@ -20,11 +18,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li>
-                <img src="../ressources/logo.png" class="" style="height:40px; width:40px;">
-              </li>
               <li class="nav-item">
-                <a class="nav-link active" href="accueil.html" color="#ffffff">Accueil</a>
+                <a class="nav-link active" href="acceuil.html" color="#ffffff">Accueil</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="formulaire.html">Ajout d'un arbre</a>
@@ -33,18 +28,15 @@
                 <a class="nav-link" href="visualisation.html">Visualisation des arbres</a>
               </li>
             </ul>
-            <div class="fw-bold" id="profil">
-
-            </div>
-        </div>
+          </div>
         </div>
     </nav>
 
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <h1 class="display-4">Bienvenue sur le site de gestion du patrimoine arboré</h1>
-                <p class="lead">Notre mission est de préserver et de valoriser le patrimoine arboré de notre ville. Explorez notre site pour en savoir plus sur nos initiatives et comment vous pouvez contribuer.</p>
+                <h1 class="display-4">Bienvenue sur le site de gestion du patrimoine arboré de notre ville de Saint-Quentin</h1>
+                <p class="lead">Notre mission est de préserver et de valoriser le patrimoine arboré de la ville. Explorez notre site pour en savoir plus sur nos initiatives et comment vous pouvez contribuer.</p>
                 <p>Ce site vous permet de visualiser les arbres plantés dans notre commune, d'ajouter de nouveaux arbres et de consulter des prédictions sur leur croissance et leur santé.</p>
             </div>
             <div class="col-md-6">
@@ -53,17 +45,27 @@
         </div>
     </div>
 
-    <script>
-        if(sessionStorage.getItem('connecté')!='True'){
-            window.location.href = "../connection.html";
-        }else{
-            prenom = sessionStorage.getItem('prenom');
-            console.log(sessionStorage.getItem('connecté'))
-            nom = sessionStorage.getItem('nom');
-            inner = prenom+' '+nom;
-            document.getElementById("profil").innerHTML = inner;
-        }
-    </script>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <p><a class="dev-link">Dévloppé par :</a></p>
+          </div>
+          <div class="col">
+            <p><a href="https://www.linkedin.com/in/dev1" class="dev-link" target="_blank">Brandon</a></p>
+          </div>
+          <div class="col">
+            <p><a href="https://www.linkedin.com/in/quentin-franquet-8a6932266/" class="dev-link" target="_blank">Kant1</a></p>
+          </div>
+          <div class="col">
+            <p><a href="https://www.linkedin.com/in/dev3" class="dev-link" target="_blank">Igore</a></p>
+          </div>
+          <div class="col">
+            <a href="https://www.isen.fr/" target="_blank"><img src="../ressources/isen.jpg" class="footer-icons" style="height: 35px; width: auto;"></a>
+          </div>  
+        </div>
+      </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
