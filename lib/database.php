@@ -117,6 +117,47 @@
         }
     } 
 
+    function dbGetArbresWhere($db,$remarquable,$fk_arb_etat,$fk_stadedev,$fk_situation){
+        $remarquableIN = '(:remarquable)';
+        $fk_arb_etatIN = '(:fk_arb_etat)';
+        $fk_stadedevIN = '(:fk_stadedev)';
+        $fk_situationIN = '(:fk_situation)';
+        if($remarquable=='Tous'){
+            $remarquableIN = "('Oui','Non')";
+        }
+        if($fk_arb_etat=='Tous'){
+            $fk_arb_etatIN = "('EN PLACE','ABATTU','Essouché','Non essouché','REMPLACÉ','SUPPRIMÉ')";
+        }
+        if($fk_stadedev=='Tous'){
+            $fk_stadedevIN = "('Jeune','Adulte','vieux','senescent')";
+        }
+        if($fk_situation=='Tous'){
+            $fk_situationIN = "('Alignement','Groupe','Isolé')";
+        }
+        try{
+            $request = "SELECT * from arbre WHERE remarquable IN ".$remarquableIN." AND fk_arb_etat IN ".$fk_arb_etatIN." AND fk_stadedev IN ".$fk_stadedevIN." AND fk_situation IN ".$fk_situationIN." ORDER BY fk_nomtech";
+            $statement = $db->prepare($request);
+            if($remarquable!='Tous'){
+                $statement->bindParam(':remarquable', $remarquable);
+            }
+            if($fk_arb_etat!='Tous'){
+                $statement->bindParam(':fk_arb_etat', $fk_arb_etat);
+            }
+            if($fk_stadedev!='Tous'){
+                $statement->bindParam(':fk_stadedev', $fk_stadedev);
+            }
+            if($fk_situation!='Tous'){
+                $statement->bindParam(':fk_situation', $fk_situation);
+            }
+            $statement->execute();
+            return $statement->fetchall(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+    } 
+
+
     function dbGetArbre($db,$id){
         try{
             $request = "SELECT * from arbre WHERE id=:id";

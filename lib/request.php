@@ -22,6 +22,34 @@
         if($_SERVER['REQUEST_METHOD']=="GET"){
             $request = dbGetArbres($db);
         }
+    }elseif($requesttype=="tabmodif"){
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $request = dbGetArbresWhere($db,$_GET['remarquable'],$_GET['fk_arb_etat'],$_GET['fk_stadedev'],$_GET['fk_situation']);
+        }
+    }elseif($requesttype=="predict_cluster"){
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $request = dbGetArbresWhere($db,$_GET['remarquable'],$_GET['fk_arb_etat'],$_GET['fk_stadedev'],$_GET['fk_situation']);
+            $myfile = fopen("../ressources/F1/arbre.csv", "w");
+            if (!$myfile) {
+                $request = "not open";
+            }else{
+                $list = array(
+                    array("haut_tot", "haut_tronc", "fk_stadedev", "fk_nomtech")
+                );
+                foreach ($request as $item) {
+                    $list[] = array(
+                        $item['haut_tot'], 
+                        $item['haut_tronc'], 
+                        $item['fk_stadedev'], 
+                        $item['fk_nomtech']
+                    );
+                }
+                foreach ($list as $line) {
+                    fputcsv($myfile, $line);
+                }
+                exec('python3 ../ressources/F1/script_1.py ../ressources/F1/arbre.csv ../ressources/F1/F1_Kmeans_3c.csv');
+            }
+        }
     }elseif($requesttype=="predict_age"){
         if($_SERVER['REQUEST_METHOD']=="GET"){
             $request = dbGetArbre($db,$_GET['id']);
@@ -36,7 +64,6 @@
                 foreach ($list as $line) {
                     fputcsv($myfile, $line);
                 }
-                // fclose($myfile);
                 exec('python3 ../ressources/F2/script_2.py ../ressources/F2/arbre.csv ../ressources/F2/F2_RandomForestClassifier.pkl');
             }
         }
@@ -54,8 +81,6 @@
                 foreach ($list as $line) {
                     fputcsv($myfile, $line);
                 }
-                // fclose($myfile);
-                
                 exec('python3 ../ressources/F3/script_3.py ../ressources/F3/arbre.csv ../ressources/F3/F3_RandomForestClassifier.pkl');
             }
         }
