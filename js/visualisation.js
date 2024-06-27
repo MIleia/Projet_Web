@@ -121,7 +121,10 @@ function predict_clusters(){
     fk_stadedev = document.getElementById("clfk_stadedev").getAttribute("value");
     fk_situation = document.getElementById("clfk_situation").getAttribute("value");
 
-    ajaxRequest('GET','../lib/request.php/predict_cluster?remarquable='+remarquable+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation,gopredict_clusters);
+    modele = document.getElementById("modele_clusters").value;
+    sessionStorage.setItem('modele', modele);
+
+    ajaxRequest('GET','../lib/request.php/predict_cluster?remarquable='+remarquable+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&modele='+modele,gopredict_clusters);
 }
 
 function gopredict_age(data){
@@ -139,7 +142,9 @@ function predict_age(){
         inner = `<span style="color:red">Veuillez sélectionner un arbre</span>`;
         document.getElementById("error_predict").innerHTML = inner;
     }else{
-        ajaxRequest('GET','../lib/request.php/predict_age?id='+id.value,gopredict_age);
+        modele = document.getElementById("modele_age").value;
+        sessionStorage.setItem('modele', modele);
+        ajaxRequest('GET','../lib/request.php/predict_age?id='+id.value+'&modele='+modele,gopredict_age);
     }
 }
 
@@ -159,7 +164,9 @@ function predict_essouche(){
         inner = `<span style="color:red">Veuillez sélectionner un arbre</span>`;
         document.getElementById("error_predict").innerHTML = inner;
     }else{
-        ajaxRequest('GET','../lib/request.php/predict_essouche?id='+id.value,gopredict_essouche);
+        modele = document.getElementById("modele_essouche").value;
+        sessionStorage.setItem('modele', modele);
+        ajaxRequest('GET','../lib/request.php/predict_essouche?id='+id.value+'&modele='+modele,gopredict_essouche);
     }
 }
 

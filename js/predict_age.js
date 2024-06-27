@@ -18,17 +18,19 @@ inner = `   <td>`+sessionStorage.getItem('longitude')+`</td>
 document.getElementById("tab_age").innerHTML = inner;
 
 
+document.getElementById("mod").innerHTML = sessionStorage.getItem('modele');
+
 fetch('../ressources/F2/Result.json')
     .then((response) => response.json())
     .then((json) => {
         if(json['age_arbre']==0){
-            inner = `<h4>Tranche d'âge estimé : 0-9 ans</h4>`;
+            inner = `<h4 style="color:red;">Tranche d'âge estimé : 0-9 ans</h4>`;
         }else if(json['age_arbre']==10){
-            inner = `<h4>Tranche d'âge estimé : 10-49 ans</h4>`;
+            inner = `<h4 style="color:red;">Tranche d'âge estimé : 10-49 ans</h4>`;
         }else if(json['age_arbre']==50){
-            inner = `<h4>Tranche d'âge estimé : 50-99 ans</h4>`;
+            inner = `<h4 style="color:red;">Tranche d'âge estimé : 50-99 ans</h4>`;
         }else{
-            inner = `<h4>Tranche d'âge estimé : 100 ans et plus</h4>`;
+            inner = `<h4 style="color:red;">Tranche d'âge estimé : 100 ans et plus</h4>`;
         }
         document.getElementById("response").innerHTML = inner;
     });

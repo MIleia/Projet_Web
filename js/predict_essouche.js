@@ -18,14 +18,15 @@ inner = `   <td>`+sessionStorage.getItem('longitude')+`</td>
             <td>`+sessionStorage.getItem('age_estim')+`</td>`;
 document.getElementById("tab_essouche").innerHTML = inner;
 
+document.getElementById("mod").innerHTML = sessionStorage.getItem('modele');
 
 fetch('../ressources/F3/Result.json')
     .then((response) => response.json())
     .then((json) => {
         if(json['essouche']==0){
-            inner = `<h4>Arbre non déraciné</h4>`;
+            inner = `<h4 style="color:red;">Arbre non déraciné</h4>`;
         }else{
-            inner = `<h4>Arbre déraciné</h4>`;
+            inner = `<h4 style="color:red;">Arbre déraciné</h4>`;
         }
         document.getElementById("response").innerHTML = inner;
     });

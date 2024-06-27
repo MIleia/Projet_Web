@@ -109,14 +109,59 @@
             </div>
         </div>
         <div class="row">
-            <div class="col d-flex justify-content-center">
-                <button type="submit" class="btn btn-success btn-block mb-4" id="predict_clusters">Prédire les clusters</button>
+            <div class="col">
+                <div class="row mb-4">
+                    <div class="col"></div>
+                    <div class="col-8 d-flex justify-content-center">
+                        <select class="form-select" id="modele_clusters">
+                            <option value="Kmeans_3c">Kmeans avec 3 clusters</option>
+                            <option value="GaussianMixture_2c">GaussianMixture avec 2 clusters</option>
+                        </select>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success btn-block mb-4" id="predict_clusters">Prédire les clusters</button>
+                    </div>
+                </div>
             </div>
-            <div class="col d-flex justify-content-center">
-                <button type="submit" class="btn btn-success btn-block mb-4" id="predict_age">Prédire l'âge de l'arbre</button>
+            <div class="col">
+                <div class="row mb-4">
+                    <div class="col"></div>
+                    <div class="col-8 d-flex justify-content-center">
+                        <select class="form-select" id="modele_age">
+                            <option value="RandomForestClassifier">Random Forest Classifier</option>
+                            <option value="DecisionTreeClassifier">Decision Tree Classifier</option>
+                            <option value="MLPClassifier">MLP Classifier</option>
+                        </select>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success btn-block mb-4" id="predict_age">Prédire l'âge de l'arbre</button>
+                    </div>
+                </div>
             </div>
-            <div class="col d-flex justify-content-center">
-                <button type="submit" class="btn btn-success btn-block mb-4" id="predict_essouche">Prédire le déracinement</button>
+
+            <div class="col">
+                <div class="row mb-4">
+                    <div class="col"></div>
+                    <div class="col-8 d-flex justify-content-center">
+                        <select class="form-select" id="modele_essouche">
+                            <option value="RandomForestClassifier">Random Forest Classifier</option>
+                            <option value="DecisionTreeClassifier">Decision Tree Classifier</option>
+                            <option value="MLPClassifier">MLP Classifier</option>
+                        </select>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="d-flex justify-content-center">                    
+                        <button type="submit" class="btn btn-success btn-block mb-4" id="predict_essouche">Prédire le déracinement</button>
+                    </div>  
+                </div>
             </div>
         </div>
         <div id="error_predict">

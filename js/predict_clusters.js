@@ -9,6 +9,14 @@ if(sessionStorage.getItem('connecté')!='True'){
     document.getElementById("profil").innerHTML = inner;
 }
 
+modele = document.getElementById("mod").innerHTML = sessionStorage.getItem('modele');
+if(modele == "Kmeans_3c"){
+    modele = "Kmeans avec 3 clusters"
+}else{
+    modele = "GaussianMixture avec 2 clusters"
+}
+document.getElementById("mod").innerHTML = modele;
+
 
 var datarbre = JSON.parse(sessionStorage.getItem('data'));
 inner = "Nombre d'arbres : "+datarbre.length;
@@ -30,16 +38,27 @@ function getColor(cluster) {
 function printMap(res){
     res = res.map(element => {
         let taille;
-        switch(element.taille_arbre) {
-            case 0:
-                taille = "Petit";
-                break;
-            case 1:
-                taille = "Moyen";
-                break;
-            case 2:
-                taille = "Grand";
-                break;
+        if(sessionStorage.getItem('modele')=="Kmeans_3c"){
+            switch(element.taille_arbre) {
+                case 0:
+                    taille = "Petit";
+                    break;
+                case 1:
+                    taille = "Moyen";
+                    break;
+                case 2:
+                    taille = "Grand";
+                    break;
+            }
+        }else{
+            switch(element.taille_arbre) {
+                case 0:
+                    taille = "Petit";
+                    break;
+                case 1:
+                    taille = "Grand";
+                    break;
+            }
         }
         return { 'taille_arbre': taille };
     });

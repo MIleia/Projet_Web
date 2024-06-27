@@ -57,7 +57,7 @@
                 foreach ($list as $line) {
                     fputcsv($myfile, $line);
                 }
-                exec('python3 ../ressources/F1/script_1.py ../ressources/F1/arbre.csv ../ressources/F1/F1_Kmeans_3c.csv');
+                exec('python3 ../ressources/F1/script_1.py ../ressources/F1/arbre.csv ../ressources/F1/F1_'.$_GET['modele'].'.csv');
             }
         }
     }elseif($requesttype=="predict_age"){
@@ -74,7 +74,7 @@
                 foreach ($list as $line) {
                     fputcsv($myfile, $line);
                 }
-                exec('python3 ../ressources/F2/script_2.py ../ressources/F2/arbre.csv ../ressources/F2/F2_RandomForestClassifier.pkl');
+                exec('python3 ../ressources/F2/script_2.py ../ressources/F2/arbre.csv ../ressources/F2/F2_'.$_GET['modele'].'.pkl');
             }
         }
     }elseif($requesttype=="predict_essouche"){
@@ -91,7 +91,7 @@
                 foreach ($list as $line) {
                     fputcsv($myfile, $line);
                 }
-                exec('python3 ../ressources/F3/script_3.py ../ressources/F3/arbre.csv ../ressources/F3/F3_RandomForestClassifier.pkl');
+                exec('python3 ../ressources/F3/script_3.py ../ressources/F3/arbre.csv ../ressources/F3/F3_'.$_GET['modele'].'.pkl');
             }
         }
     }
