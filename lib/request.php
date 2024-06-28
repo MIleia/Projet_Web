@@ -20,7 +20,7 @@
         }
     }elseif($requesttype=="remplir"){
         if($_SERVER['REQUEST_METHOD']=="POST"){
-            $request = True;
+            $request = true;
             $exec = 'python3 ../ressources/remplissage.py '.$_POST['mail'];
             exec($exec);
         }
