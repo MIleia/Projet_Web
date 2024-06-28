@@ -20,6 +20,7 @@
         }
     }
 
+    // Récupère l'utilisateur correspondant au mail
     function dbGetUser($db,$mail,$mdp){
         try{
             $request = 'SELECT * FROM users where mail=:mail';
@@ -38,7 +39,7 @@
         }
     } 
 
-
+    // Vérifie si le mail est déjà pris
     function AlreadyUser($db,$mail){
         try{
             $request = 'SELECT * FROM users where mail=:mail';
@@ -56,6 +57,7 @@
             return false;
         }
     }
+    // Créer un nouveau user
     function dbInsertNewUser($db,$mail,$nom,$prenom,$mdp){
         try{
             if(!AlreadyUser($db,$mail)){
@@ -76,8 +78,7 @@
         }
     } 
 
-
-
+    // Créer un nouveau arbre
     function dbInsertNewArb($db, $longitude, $latitude, $haut_tot, $haut_tronc, $tronc_diam, $fk_arb_etat, $fk_stadedev, $fk_situation, $fk_port, $fk_pied, $fk_revetement, $remarquable, $age_estim, $fk_prec_estim, $fk_nomtech, $mail){
         try {
             $stmt = $db->prepare("INSERT INTO arbre (longitude, latitude, haut_tot, haut_tronc, tronc_diam, fk_arb_etat, fk_stadedev, fk_situation, fk_port, fk_pied, fk_revetement, remarquable, age_estim, fk_prec_estim, fk_nomtech, mail) VALUES (:longitude, :latitude, :haut_tot, :haut_tronc, :tronc_diam, :fk_arb_etat, :fk_stadedev, :fk_situation, :fk_port, :fk_pied, :fk_revetement, :remarquable, :age_estim, :fk_prec_estim, :fk_nomtech, :mail)");
@@ -105,6 +106,7 @@
         }
     }
     
+    // Récupère les différents noms d'espèces
     function dbGetNoms($db){
         try{
             $request = "SELECT DISTINCT fk_nomtech FROM arbre ORDER BY fk_nomtech";
@@ -117,7 +119,7 @@
         }
     } 
 
-
+    // Supprime les arbres
     function dbDelete($db){
         try{
             $stmt = $db->prepare("DELETE FROM arbre");
@@ -129,7 +131,7 @@
         }
     } 
 
-
+    // Récupère tous les arbres
     function dbGetArbres($db){
         try{
             $request = "SELECT * from arbre ORDER BY fk_nomtech";
@@ -142,6 +144,7 @@
         }
     } 
 
+    // Récupère tous les arbres en fonction de conditions
     function dbGetArbresWhere($db,$remarquable,$fk_arb_etat,$fk_stadedev,$fk_situation){
         $remarquableIN = '(:remarquable)';
         $fk_arb_etatIN = '(:fk_arb_etat)';
@@ -182,7 +185,7 @@
         }
     } 
 
-
+    // Récupère l'arbre en fonction de son id
     function dbGetArbre($db,$id){
         try{
             $request = "SELECT * from arbre WHERE id=:id";

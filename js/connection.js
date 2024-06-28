@@ -1,7 +1,11 @@
+// Si l'utilisateur est connecté, le redirige vers la page d'accueil
 if(sessionStorage.getItem('connecté')=='True'){
     window.location.href = "/pages/accueil.html";
 }
 
+
+//======================================================CONNECTION===========================================================//
+// Dit si le mot de passe ou le mail est incorrect, sinon envoie à la page d'accueil 
 function confirm(data){
     if(data=="error"){
         inner = `<span style="color:red">Adresse mail ou mot de passe incorrect</span>`;
@@ -14,7 +18,7 @@ function confirm(data){
         window.location.href = "pages/accueil.html";
     }
 }
-
+// Récupère les champs de connection et fait une requête GET au serveur et renvoie le résultat dans confirm
 function connection(){
     mail = document.getElementById("mail").value;
     document.getElementById('mail').value = "";
@@ -35,11 +39,12 @@ function connection(){
 }   
 
 
+//=======================================================LISTENER============================================================//
+// Ecoute le bouton de connection, et si il est appuyer, appel la fonction connection
 function listener(){
     document.getElementById("connect").addEventListener("click", function(event){
         event.preventDefault();
         connection();
     });
 }
-
 listener();

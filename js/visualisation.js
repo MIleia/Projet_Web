@@ -7,6 +7,8 @@ if(sessionStorage.getItem('connecté')!='True'){
     document.getElementById("profil").innerHTML = inner;
 }
 
+//=========================================================MAP===============================================================//
+// Affiche la map et les arbres dessus avec leurs différentes caractéristiques
 function printMap(arbres) {
     const lats = arbres.map(arbre => arbre.latitude);
     const lons = arbres.map(arbre => arbre.longitude);
@@ -53,6 +55,9 @@ function printMap(arbres) {
     Plotly.newPlot('map', data, layout);
 }
 
+
+//=========================================================TABLEAU===========================================================//
+// Remplis les lignes du tableau par arbres
 function printtab(data){
     inner= '';
     for(let i=0; i<data.length; i++){
@@ -73,7 +78,7 @@ function printtab(data){
                     </tr>`;
     }
     document.getElementById("tab").innerHTML = inner;
-
+    // Enregistre les choix de tries pour les arbres (moyen de récupérer tous les arbres du tableau)
     remarquable = document.getElementById("remarquable").value;
     fk_arb_etat = document.getElementById("fk_arb_etat").value;
     fk_stadedev = document.getElementById("fk_stadedev").value;
@@ -92,13 +97,13 @@ function printtab(data){
                 <th scope="col" class="align-middle">Port</th>
                 <th scope="col" class="align-middle">Pied</th>`;
     document.getElementById("th").innerHTML = inner;
-
-
+    // Affiche les arbres sur la carte
     printMap(data);
 }
+// Fais une requête GET pour récupérer tous les arbres et les afficher avec printab
 ajaxRequest('GET','../lib/request.php/tab',printtab);
 
-
+// Récupère les choix de triage et fais une requête GET pour récupérer tous les abres suivants les conditions
 function trier(){
     remarquable = document.getElementById("remarquable").value;
     fk_arb_etat = document.getElementById("fk_arb_etat").value;
@@ -109,12 +114,13 @@ function trier(){
 }
 
 
-
-
+//=======================================================PREDICTIONS=========================================================//
+// Redirige vers la page de prédiction des clusters
 function gopredict_clusters(data){
     sessionStorage.setItem('data', JSON.stringify(data));
     window.location.href = "predict_clusters.html";
 }
+// Enregistre les choix du triage pour les arbres et fais une requête GET pour récupérer ces arbres et prédire leurs clusters
 function predict_clusters(){
     remarquable = document.getElementById("clremarquable").getAttribute("value");
     fk_arb_etat = document.getElementById("clfk_arb_etat").getAttribute("value");
@@ -127,6 +133,7 @@ function predict_clusters(){
     ajaxRequest('GET','../lib/request.php/predict_cluster?remarquable='+remarquable+'&fk_arb_etat='+fk_arb_etat+'&fk_stadedev='+fk_stadedev+'&fk_situation='+fk_situation+'&modele='+modele,gopredict_clusters);
 }
 
+// Enregistre les informations utiles et redirige vers la page de prédiction de l'âge
 function gopredict_age(data){
     sessionStorage.setItem('longitude', data['longitude']);
     sessionStorage.setItem('latitude', data['latitude']);
@@ -136,6 +143,7 @@ function gopredict_age(data){
     sessionStorage.setItem('fk_prec_estim', data['fk_prec_estim']);
     window.location.href = "predict_age.html";
 }
+// Vérifie si on a sélectionné un arbre et si c'est le cas, récupère le modèle et fais une requête GET pour prédire l'âge et renvoyer les informations de l'arbre
 function predict_age(){
     id = document.querySelector('input[name=choix_arbre]:checked');
     if (id == null){
@@ -148,6 +156,7 @@ function predict_age(){
     }
 }
 
+// Enregistre les informations utiles et redirige vers la page de prédiction du déracinement
 function gopredict_essouche(data){
     sessionStorage.setItem('longitude', data['longitude']);
     sessionStorage.setItem('latitude', data['latitude']);
@@ -158,6 +167,7 @@ function gopredict_essouche(data){
     sessionStorage.setItem('age_estim', data['age_estim']);
     window.location.href = "predict_essouche.html";
 }
+// Vérifie si on a sélectionné un arbre et si c'est le cas, récupère le modèle et fais une requête GET pour prédire le déracinement et renvoyer les informations de l'arbre
 function predict_essouche(){
     id = document.querySelector('input[name=choix_arbre]:checked');
     if (id == null){
@@ -171,8 +181,8 @@ function predict_essouche(){
 }
 
 
-
-
+//=======================================================LISTENER============================================================//
+// Ecoute les différents boutons
 function listener(){
     document.getElementById("trie").addEventListener("click", function(event){
         event.preventDefault();

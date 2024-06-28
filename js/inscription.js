@@ -6,6 +6,8 @@ var mail = "";
 var nom = "";
 var prenom = "";
 
+//=====================================================INSCRIPTION===========================================================//
+// Confirme l'inscription en redirigeant sur connection.html, ou renvoie un message d'erreur si le mail est déjà utilisé
 function confirm(data){
     if(data=="Already"){
         inner = `<span style="color:red">Adresse mail déjà utilisée</span>`;
@@ -14,7 +16,7 @@ function confirm(data){
         window.location.href = "connection.html";
     }
 }
-
+// Récupère les différentes information du form, les vérifies, et fais une requête POST pour ajouter l'utilisateur
 function inscription(){
     mail = document.getElementById("mail").value;
     document.getElementById('mail').value = "";
@@ -46,12 +48,12 @@ function inscription(){
     }
 }   
 
-
+//=======================================================LISTENER============================================================//
+// Ecoute le bouton d'inscription
 function listener(){
     document.getElementById("inscrire").addEventListener("click", function(event){
         event.preventDefault();
         inscription();
     });
 }
-
 listener();

@@ -9,6 +9,7 @@ if(sessionStorage.getItem('connecté')!='True'){
     document.getElementById("profil").innerHTML = inner;
 }
 
+// Récupère et affiche les informations utiles
 inner = `   <td>`+sessionStorage.getItem('longitude')+`</td>
             <td>`+sessionStorage.getItem('latitude')+`</td>
             <td>`+sessionStorage.getItem('haut_tot')+`</td>
@@ -17,9 +18,10 @@ inner = `   <td>`+sessionStorage.getItem('longitude')+`</td>
             <td>`+sessionStorage.getItem('fk_prec_estim')+`</td>`;
 document.getElementById("tab_age").innerHTML = inner;
 
-
+// Récupère et affiche le modèle
 document.getElementById("mod").innerHTML = sessionStorage.getItem('modele');
 
+// Récupère le résultat de la prédiction et l'affiche
 fetch('../ressources/F2/Result.json')
     .then((response) => response.json())
     .then((json) => {
@@ -35,13 +37,10 @@ fetch('../ressources/F2/Result.json')
         document.getElementById("response").innerHTML = inner;
     });
 
-
-
+// Supprime les informations utiles
 sessionStorage.setItem('longitude', '');
 sessionStorage.setItem('latitude', '');
 sessionStorage.setItem('haut_tot', '');
 sessionStorage.setItem('haut_tronc', '');
 sessionStorage.setItem('tronc_diam', '');
 sessionStorage.setItem('fk_prec_estim', '');
-
-

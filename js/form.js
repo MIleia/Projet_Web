@@ -1,21 +1,26 @@
+// Si l'utilisateur n'est pas connecté, le renvoie sur la page de connection
 if(sessionStorage.getItem('connecté')!='True'){
     window.location.href = "../connection.html";
 }else{
+    // Affiche son nom et prénom
     prenom = sessionStorage.getItem('prenom');
     nom = sessionStorage.getItem('nom');
     inner = prenom+' '+nom;
     document.getElementById("profil").innerHTML = inner;
+    // Si les arbres du fichier Data_Arbre.csv sont déjà dans la BDD, on ne peut pas rappuyer sur le bouton
     if(localStorage.getItem('remplir')=='True'){
         inner =`<button type="submit" class="btn btn-success btn-block mb-4" id="remplir" disabled>Remplir avec Data_Arbre.csv</button>`;
         document.getElementById("bouton_remplir").innerHTML = inner;
     }
 }
 
+//======================================================FORMULAIRE===========================================================//
+// Confirme que l'arbre a bien été ajouté
 function confirm(){
     inner =`<span style="color:#198754;">Arbre bien ajouté<span>`
     document.getElementById("ajout_succerror").innerHTML = inner;
 }
-
+// Récupère les informations dans le formulaire, les vérifies, et fait une requête POST pour inséré un arbre
 function form(){
     longitude = document.getElementById("longitude").value;
     document.getElementById('longitude').value = "";
@@ -65,10 +70,13 @@ function form(){
     }
 }
 
+//========================================================BOUTONS============================================================//
+// Confirme que les arbres ont bien été ajoutés
 function confirmr(){
     inner =`<span style="color:#198754;">Arbres bien ajoutés<span>`
     document.getElementById("ajout_succerror").innerHTML = inner;
 }
+// Remplace le bouton par un bouton désactivé et appel une requête POST pour appeler le script python qui insérera les arbres du fichier Data_Arbre.csv et appel confirmr
 function remplir(){
     inner =`<button type="submit" class="btn btn-success btn-block mb-4" id="remplir" disabled>Remplir avec Data_Arbre.csv</button>`;
     document.getElementById("bouton_remplir").innerHTML = inner;
@@ -78,6 +86,7 @@ function remplir(){
 }
 //localStorage.setItem('remplir', 'False');
 
+// Confirme que les arbres ont bien été supprimé et réactive le bouton d'ajout des arbres depuis le fichier .csv
 function confirmv(){
     inner =`<span style="color:#198754;">Arbres bien supprimés<span>`
     document.getElementById("ajout_succerror").innerHTML = inner;
@@ -86,11 +95,13 @@ function confirmv(){
     document.getElementById("bouton_remplir").innerHTML = inner;
     listener();
 }
+// Fais une requête DELETE pour supprimer tous les arbres de la base de données et appel confirmv
 function vider(){
     ajaxRequest('DELETE','../lib/request.php/vider',confirmv);
 }
 
 
+// Remplis les noms disponible pour l'autocompletion
 function autocompletion(data){
     inner = "";
     for(let i=0; i<data.length; i++){
@@ -98,10 +109,12 @@ function autocompletion(data){
     }
     document.getElementById("noms").innerHTML = inner;
 }
+// Fais une requête pour récupérer les différents noms dans la base de données, et appel autocompletion
 ajaxRequest('GET','../lib/request.php/autocomp',autocompletion);
 
 
-
+//=======================================================LISTENER============================================================//
+// Ecoute les différents boutons d'ajouts et de suppression
 function listener(){
     document.getElementById("ajout").addEventListener("click", function(event){
         event.preventDefault();

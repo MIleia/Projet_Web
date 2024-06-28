@@ -9,6 +9,7 @@ if(sessionStorage.getItem('connecté')!='True'){
     document.getElementById("profil").innerHTML = inner;
 }
 
+// Récupère et affiche le modèle utiliser
 modele = document.getElementById("mod").innerHTML = sessionStorage.getItem('modele');
 if(modele == "Kmeans_3c"){
     modele = "Kmeans avec 3 clusters"
@@ -17,13 +18,12 @@ if(modele == "Kmeans_3c"){
 }
 document.getElementById("mod").innerHTML = modele;
 
-
+// Récupère les informations des arbres
 var datarbre = JSON.parse(sessionStorage.getItem('data'));
 inner = "Nombre d'arbres : "+datarbre.length;
 document.getElementById("nb_arb").innerHTML = inner;
 
-
-
+// Fonction qui colorie en fonction des cluster
 function getColor(cluster) {
     switch(cluster) {
         case 'Petit':
@@ -35,9 +35,11 @@ function getColor(cluster) {
     }
 }
 
+// Affiche la map
 function printMap(res){
     res = res.map(element => {
         let taille;
+        // Remplace les 0,1,2 par leur équivalant
         if(sessionStorage.getItem('modele')=="Kmeans_3c"){
             switch(element.taille_arbre) {
                 case 0:
@@ -62,6 +64,7 @@ function printMap(res){
         }
         return { 'taille_arbre': taille };
     });
+    // Fusionne le tableau des arbres et leur résultat de prédiction
     let arbres = datarbre.map((element, index) => {
         return { ...element, ...res[index] };
     });
@@ -112,6 +115,7 @@ function printMap(res){
     Plotly.newPlot('map', data, layout);
 }
 
+// Récupère les résultats des prédictions
 fetch('../ressources/F1/Result.json')
     .then((response) => response.json())
     .then((json) => {
@@ -120,5 +124,3 @@ fetch('../ressources/F1/Result.json')
 
 
 sessionStorage.setItem('data', '');
-
-
